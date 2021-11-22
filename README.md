@@ -10,3 +10,16 @@ Of course the games we will code will be more complexe as the project goes on, b
 This project will in collaboration with the Discord Bot project. Most of the game we will code will be implemented to the discord bot in some way.
 If you have an idea of a game we could code that isn't on the list yet, go on discord and suggest your idea !
 Don't be afraid we don't bite, we are all mind-open :)
+
+## Game list:
+- Guess the Number
+- Pierre Papier Ciseaux
+- Jeux des allumettes
+- Morpion
+- Pendu
+- Puissance 4
+- Jeu du Taquin
+- Jeu de peterne
+- Othello
+- Jeux de cartes (n'importe lesquels)
+- Echecs

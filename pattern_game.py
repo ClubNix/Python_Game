@@ -1,4 +1,3 @@
-import numpy as np
 import random
 
 class PatternGame():
@@ -32,15 +31,17 @@ class PatternGame():
 		if (x < 0 or 2 < x) or (y < 0 or 2 < y):
 			return
 
-		for i in range(x-1, x+2):
-			for j in range(y-1, y+2):
-				if (i < 0 or 2 < i) or (j < 0 or 2 < j):
-					continue
+		tiles = [(x-1,y), (x,y-1), (x,y), (x,y+1), (x+1,y)]
+		for tile in tiles:
+			i = tile[0]
+			j = tile[1]
+			if (i < 0 or 2 < i) or (j < 0 or 2 < j):
+				continue
 
-				if self.tab[i][j] == 0:
-					self.tab[i][j] = 1
-				else:
-					self.tab[i][j] = 0
+			if self.tab[i][j] == 0:
+				self.tab[i][j] = 1
+			else:
+				self.tab[i][j] = 0
 
 	def toTuple(self, index : int) -> tuple:
 		if index == 1:

@@ -6,13 +6,15 @@ class GuessNumber():
         self.playerID = playerID
         self.number = 0
         self.tryCount = 0
+        self.max = 1000
 
     def chooseNumber(self, difficulty : int) -> None:
         if difficulty <= 0 or 4 <= difficulty:
             return
 
-        self.number = random.randint(0, math.pow(10, difficulty+1))
-        print(self.number)
+        #self.number = random.randint(0, math.pow(10, difficulty+1))
+        self.number = random.randint(0, 1001)
+        #print(self.number)
 
     def guessTest(self, guess : int) -> None:
         if guess < self.number:
@@ -22,7 +24,7 @@ class GuessNumber():
         else:
             return True
 
-        self.tryCount -= 1
+        self.tryCount += 1
         return False
         
 
@@ -53,6 +55,11 @@ def main():
 
         if game.guessTest(guess):
             print(f"You won ! The number to guess was : {game.number}")
+            print(game.tryCount)
+
+            with open("/home/erwann/Documents/nix/res.txt", 'a') as file:
+                file.writelines(f"{game.max} - {game.number} => {game.tryCount}\n")
+                file.close()
             break
 
 if __name__ == "__main__":

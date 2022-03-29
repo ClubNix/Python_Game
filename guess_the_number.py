@@ -1,22 +1,19 @@
 import random
-import math
 
 class GuessNumber():
     def __init__(self, playerID : int):
         self.playerID = playerID
         self.number = 0
         self.tryCount = 0
-        self.max = 1000
+        self.maxTry = 9
 
     def chooseNumber(self, difficulty : int) -> None:
         if difficulty <= 0 or 4 <= difficulty:
-            return
+            return 
 
-        #self.number = random.randint(0, math.pow(10, difficulty+1))
-        self.number = random.randint(0, 1001)
-        #print(self.number)
+        self.number = random.randint(0, 500*difficulty)
 
-    def guessTest(self, guess : int) -> None:
+    def guessTest(self, guess : int) -> bool:
         if guess < self.number:
             print("It's more !")
         elif guess > self.number:
@@ -26,19 +23,21 @@ class GuessNumber():
 
         self.tryCount += 1
         return False
+
+    def checkLose(self) -> bool:
+        return self.tryCount == self.maxTry
         
 
 def main():
     game = GuessNumber(0)
 
     testInput = False
-    hasWon = False
     difficultyInput = 0
     guess = 0
 
     while not testInput:
         try:
-            difficultyInput = int(input("Choose your difficulty (1 / 2 / 3) : "))
+            difficultyInput = int(input("Choose your difficulty \n1 : 0-500 \n2 : 0-1000 \n3 : 0-1500\n"))
             if 1 <= difficultyInput and difficultyInput <= 3:
                 testInput = True
         except ValueError as _:
@@ -46,7 +45,7 @@ def main():
 
     game.chooseNumber(difficultyInput)
 
-    while not hasWon:
+    while True:
         try:
             guess = int(input("Choose your guess : "))
         except ValueError as _:
@@ -56,10 +55,10 @@ def main():
         if game.guessTest(guess):
             print(f"You won ! The number to guess was : {game.number}")
             print(game.tryCount)
-
-            with open("/home/erwann/Documents/nix/res.txt", 'a') as file:
-                file.writelines(f"{game.max} - {game.number} => {game.tryCount}\n")
-                file.close()
+            break
+        
+        elif game.checkLose():
+            print(f"You lose ! The max try is {game.maxTry}... \nThe number to guess was {game.number}") 
             break
 
 if __name__ == "__main__":
